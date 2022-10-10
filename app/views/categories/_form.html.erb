@@ -1,0 +1,5 @@
+<%= form_with(url: "/categories", method: "post") do|form| %>
+<%= form.text_field "category[name]", placeholder: "Enter category name", autofocus: true%>
+<%= form.text_area "category[description]"%>
+<%= form.submit "Save" %>
+<% end %>
