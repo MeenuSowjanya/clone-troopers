@@ -1,0 +1,27 @@
+<% content_for :title, "Knowledge Quest | Category - #{@category.name}" %>
+<p id="notice"><%= notice %></p>
+
+
+<table>
+
+  <tr>
+    <td>
+      <strong>Name:</strong>
+      <%= @category.name %>
+    </td>
+    <td>
+      <strong>Description:</strong>
+      <%= @category.description %>
+    </td>
+  </tr>
+  
+  <% @category.folders.each do |folder| %>
+  <tr>
+  <td><a href="/folders/<%=folder.id%>"><%= folder.name %></a></td>
+  <td><%= folder.articles.count %></td>
+   <% end %>
+  </tr>
+  <%= link_to 'Back', root_path %>
+</table>
+<%= link_to 'Create New Folder', new_folder_path %>
+

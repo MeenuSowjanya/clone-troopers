@@ -1,0 +1,6 @@
+<% content_for :title, "Knowledge Quest | Edit Folder - #{@folder.name}" %>
+<h1>Editing Folder</h1>
+
+<%= render 'form', folder: @folder %>
+
+<%= link_to 'Back', "/folders/#{@folder.id}" %>
