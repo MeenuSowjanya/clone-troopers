@@ -17,8 +17,8 @@
   <%= @article.folder.name %>
 </p>
 
-<%= link_to 'Edit', "/articles/new/#{@article.id}/1/0", method: :post %> |
-<%= link_to 'Clone', "/articles/new/#{@article.id}/0/1", method: :post %> |
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Clone', "/articles/new/#{@article.id}/1", method: :post %> |
 <%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>|
 <%= link_to 'Back', "/folders/#{@article.folder.id}" %> 
 

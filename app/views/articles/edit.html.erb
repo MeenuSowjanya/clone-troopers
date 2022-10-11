@@ -16,19 +16,19 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title, value: @title %>
+    <%= form.text_field :title, value: @article.title %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description, value: @description %>
+    <%= form.text_area :description, value: @article.description %>
   </div>
 
   <div class="field">
     <%= form.label :folder_id %>
     <select name="article[folder_id]">
       <% Folder.all.each do |folder| %>
-      <option value = "<%= folder.id %>" selected = <%= (@article.folder_id.to_i == folder.id.to_i) ? "selected" : "" %>><%= folder.name %></option>
+      <option value = "<%= folder.id %>" <%=((@article.folder_id.to_i == folder.id.to_i) ? "selected" : nil)%>><%= folder.name %></option>
       <% end %>
     </select>
   </div>
@@ -38,4 +38,4 @@
   </div>
 <% end %>
 
-<%= link_to 'Back', "/articles/#{article.id}" %>
+<%= link_to 'Back', "/articles/#{@article.id}" %>
