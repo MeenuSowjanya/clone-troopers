@@ -21,7 +21,7 @@
 <% @folder.articles.each do |article| %>
 <tr>
    <td><a href="/articles/<%=article.id%>"><%= article.title %></a></td>
-   <td><%= article.updated_at.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %></td>
+   <td><%= article.updated_at.localtime.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %></td>
 </tr>
 <% end %>
 <%= link_to 'Edit', edit_folder_path(@folder) %> |
@@ -29,4 +29,4 @@
 <%= link_to 'Back', root_path %>
 </table>
 
-<%= link_to 'Create New Article', "/articles/new/0/0", method: :post %>
+<%= link_to 'Create New Article', "/articles/new", method: :get %>

@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @ticket.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ticket.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @ticket.status %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @ticket.priority %>
+</p>
+
+<br>
+
+<h4> Notes </h4>
+<% @ticket.notes.each do|note| %>
+  <%= note.description %>
+  <%= note.updated_at.localtime.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %><br>
+<% end %>
+
+<br>
+
+<h4> Replies </h4>
+<% @ticket.replies.each do|reply| %>
+  <%= reply.description %>
+  <%= reply.updated_at.localtime.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %> <br>
+<% end %>
+
+<br>
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Add note', "/notes/new/#{@ticket.id}" %> |
+<%= link_to 'Add reply', "/replies/new/#{@ticket.id}" %> |
+<a onclick="document.getElementById('popup').style.display='block';">Add solution article</a> |
+<%= link_to 'Back', tickets_path %>
+
+<div style="display:none" id="popup">
+  <br>
+  <%= form_with(url: "/tickets/redirect/#{@ticket.id}",method: :get) do |form| %>
+  <%= form.text_field :title, value: @ticket.title %><br>
+  <%= form.radio_button :redirect_to, 1 %> Make ticket description as article description <br>
+  <%= form.radio_button :redirect_to, 2 %> Make last note as article description <br>
+  <%= form.radio_button :redirect_to, 3 %> Make last reply as article description <br>
+  <%= form.radio_button :redirect_to, 4 %> Custom <br>
+  <%= form.submit %>
+  <% end %>
+</div>

@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_221_010_134_841) do
+ActiveRecord::Schema.define(version: 20_221_011_093_813) do
   create_table 'articles', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
     t.string 'title'
     t.text 'description'
@@ -38,6 +38,33 @@ ActiveRecord::Schema.define(version: 20_221_010_134_841) do
     t.index ['category_id'], name: 'index_folders_on_category_id'
   end
 
+  create_table 'notes', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.text 'description'
+    t.bigint 'ticket_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['ticket_id'], name: 'index_notes_on_ticket_id'
+  end
+
+  create_table 'replies', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.text 'description'
+    t.bigint 'ticket_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['ticket_id'], name: 'index_replies_on_ticket_id'
+  end
+
+  create_table 'tickets', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.string 'title'
+    t.text 'description'
+    t.string 'status'
+    t.string 'priority'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
+
   add_foreign_key 'articles', 'folders', on_update: :cascade, on_delete: :cascade
   add_foreign_key 'folders', 'categories', on_update: :cascade, on_delete: :cascade
+  add_foreign_key 'notes', 'tickets'
+  add_foreign_key 'replies', 'tickets'
 end

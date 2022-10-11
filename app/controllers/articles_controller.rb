@@ -15,10 +15,11 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
     @article_to_clone_id = params[:article_id]
-    @clone = params[:clone]
-    @article_record_to_clone = @article_to_clone_id.to_i != 0 ? Article.find(@article_to_clone_id) : nil
-    @title = @article_to_clone_id.to_i != 0 ? "Clone of #{@article_record_to_clone.title}" : ''
-    @description = @article_to_clone_id.to_i != 0 ?  @article_record_to_clone.description : ''
+    unless @article_to_clone_id.nil?
+      @article_record_to_clone = Article.find(@article_to_clone_id)
+      @title = "Clone of #{@article_record_to_clone.title}"
+      @description = @article_record_to_clone.description
+    end
   end
 
   # GET /articles/1/edit
@@ -60,6 +61,23 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def solution_article_new
+    @article = Article.new
+    @ticket = Ticket.find(params[:ticket_id])
+    @title = params[:title]
+    @option = params[:redirect_to]
+    case @option.to_i
+    when 1
+      @description = @ticket.description
+    when 2
+      @description = @ticket.notes.last.description
+    when 3
+      @description = @ticket.replies.last.description
+    end
+    puts "wdcjosqo;qsjopqj'dpkqs[d',qlwmklsw"
+    puts @description
   end
 
   private
