@@ -1,0 +1,42 @@
+<% content_for :title, "Knowledge Quest | Edit Folder - #{@folder.name}" %>
+<h1>Editing Folder</h1>
+
+<%= form_with(model: @folder) do |form| %>
+  <% if @folder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+        <% @folder.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <select name="folder[category_id]">
+      <% Category.all.each do |category| %>
+      <option value = "<%= category.id %>" selected = <%= (@folder.category_id.to_i == category.id.to_i) ? "selected" : "" %>><%= category.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', "/folders/#{@folder.id}" %>

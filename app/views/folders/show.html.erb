@@ -1,0 +1,32 @@
+<% content_for :title, "Knowledge Quest | Folder - #{@folder.name}" %>
+<p id="notice"><%= notice %></p>
+
+<table>
+
+<tr>
+  <td>
+    <strong>Name:</strong>
+    <%= @folder.name %>
+  </td>
+  <td>
+    <strong>Description:</strong>
+    <%= @folder.description %>
+  </td>
+  <td>
+    <strong>Category:</strong>
+    <%= @folder.category.name %>
+  </td>
+</tr>
+
+<% @folder.articles.each do |article| %>
+<tr>
+   <td><a href="/articles/<%=article.id%>"><%= article.title %></a></td>
+   <td><%= article.updated_at.localtime.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %></td>
+</tr>
+<% end %>
+<%= link_to 'Edit', edit_folder_path(@folder) %> |
+<%= link_to 'Destroy', "/folders/#{@folder.id}", method: :delete %>|
+<%= link_to 'Back', root_path %>
+</table>
+
+<%= link_to 'Create New Article', "/articles/new", method: :get %>

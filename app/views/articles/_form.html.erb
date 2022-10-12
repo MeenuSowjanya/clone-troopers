@@ -1,0 +1,40 @@
+<%= form_with(model: article) do |form| %>
+<% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+        <% article.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, value: @title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, value: @description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :folder_id %>
+    <select name="article[folder_id]">
+      <% Folder.all.each do |folder| %>
+      <option value = "<%= folder.id %>"><%= folder.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Article" %>
+  </div>
+<% end %>
+
+
+
+  

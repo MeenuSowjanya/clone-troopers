@@ -1,0 +1,24 @@
+<% content_for :title, "Knowledge Quest | Article - #{@article.title}" %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @article.description %>
+</p>
+
+<p>
+  <strong>Folder:</strong>
+  <%= @article.folder.name %>
+</p>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Clone', "/articles/#{@article.id}", method: :post %> |
+<%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>|
+<%= link_to 'Back', "/folders/#{@article.folder.id}" %> 
+
