@@ -58,7 +58,7 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to request.referer, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,8 +76,6 @@ class ArticlesController < ApplicationController
     when 3
       @description = @ticket.replies.last.description
     end
-    puts "wdcjosqo;qsjopqj'dpkqs[d',qlwmklsw"
-    puts @description
   end
 
   private
