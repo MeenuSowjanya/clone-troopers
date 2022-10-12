@@ -1,0 +1,21 @@
+.form-name{
+    display: grid;
+}
+.form-name input{
+    padding: 10px;
+    outline: 1px solid transparent;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+}
+input:focus{
+   outline: 1px solid blue;
+    border: 1px solid rgba(17, 17, 224, 0.774);
+   
+}
+.red{
+    color: red;
+
+}
+
+.text-area{
+    border: 1px solid rgba;
+}

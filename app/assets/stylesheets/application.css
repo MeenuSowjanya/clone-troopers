@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+:root{
+    --primary : #1B334A;
+    --hover : #1B334A;
+    --backcolor : #f5f7f9;
+}
+ul{
+    padding:0 !important;
+    margin: 0 !important;
+}
+li{
+    list-style: none;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.link_tag{
+    text-decoration: none;
+    color: black !important;
+    background-color: none !important;
+}
+a.link_tag:hover{
+background-color: transparent !important;
+color: grey !important;
+}
+
+.alert.alert-primary{
+    z-index: 20;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+}

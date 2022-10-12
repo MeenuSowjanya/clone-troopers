@@ -1,40 +1,211 @@
 <% content_for :title, "Knowledge Quest | All Categories" %>
-<p id="notice"><%= notice %></p>
 
-<h1>Categories</h1>
+<div class="home">
+  <div class="sidenav-base">
+    <span class="logo">
+      <%= image_tag 'logo.png' %>
+    </span>
+    <div class="icon-holder">
+      <ul>
+        <li>
+          <%= image_tag 'image (9).png' %>
+        </li>
+        <li>
+          <%= image_tag 'image (8).png' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="nav-holder-base">
+    <div class="topnav-one-base">
+      <i class='bx bx-filter-alt'></i>
+      <span>
+        Knowledge base</span>
+    </div>
+    <div class="topnav-two-base">
+      <div class="search">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          >
+          <button class="btn btn-outline-success" type="submit"><i class='bx bx-search'></i></button>
+        </form>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      </div>
+      <div class="dropdown-base">
 
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td>==============================</td>
-        <td>=============================</td>
-      </tr>
-      <tr>
-        <td><%= link_to category.name, category %></td>
-        <td><%= category.description %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% category.folders.each do |folder| %>
-      <tr><td>-------------------------</td><td>-------------------------------</td></tr>
-      <tr>
-          <td><a href="/folders/<%=folder.id%>"><%= folder.name %></a></td>
-          <td><%= folder.articles.count %></td>
-        </tr>
+        <div class="new-article-base">
+        <%= link_to "articles/new" do%>
+          <span class="btn btn-secondary">
+            <i class='bx bx-plus'></i>
+            New Article</span>
+        <% end %>
+
+        </div>
+        <div class="dropdown">
+
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#cate" data-bs-whatever="@mdo">New Category</button>
+            </li>
+              <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#folder" data-bs-whatever="@mdo">New Folder</button>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ace">
+      <div class="card-container-base">
+        <span class="cate   ">Category (<%= Category.all.count %>)</span>
+        <div class="card-holder-card">
+          <% @categories.each do |category| %>
+            <div class="card-base">
+              <div class="card-header">
+                <h4><%= link_to category.name.capitalize, category,class: 'link_tag' %></h4>
+              </div>
+              <ul class="fill-box">
+                <% category.folders.each do |folder| %>
+                  <li>
+                    <%= folder.name %>
+                    <span class="folder-count"><%= folder.articles.count %></span></li>
+                <% end %>
+                
+              </ul>
+              <div class="bottom-text">
+              <%= link_to category,class:"link_tag" do%>
+              View category <i class='bx bxs-right-arrow'></i></div>
+              <% end %>
+            </div>
+            
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="cate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Category</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: @category) do |form| %>
+      <% if @category.errors.any? %>
+     <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% @category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-name">
+    <p class="form-label">Name<span class="red">*</span></p>
+    <%= form.text_field :name , placeholder: "Enter category name" %>
+  </div>
+
+  <div class="form-name">
+    <%= form.label :description %>
+    <%= form.text_area :description ,class: 'text-area'%>
+  </div>
+
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%# <button type="button" class="btn btn-primary">Send message</button> %>
+        <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+           Save
+        <% end %>
+<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="folder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Folder</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: @folder) do |form| %>
+  <% if @folder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+        <% @folder.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-name">
+    <p class="form-label">Name<span class="red">*</span></p>
+   
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="form-name">
+    <%= form.label :description %>
+    <%= form.text_area :description ,class:'text-area'%>
+  </div>
+
+  <div class="form-name">
+    <%= form.label :category_id %>
+    <select name="folder[category_id]" class="form-select">
+      <% Category.all.each do |category| %>
+      <option  value = "<%= category.id %>" ><%= category.name %></option>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </select>
+  </div>
 
-<br>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+           Save
+        <% end %>
+<% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New Category', new_category_path %>
+
+
+
+
