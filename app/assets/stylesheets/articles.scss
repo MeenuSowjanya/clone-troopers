@@ -5,14 +5,15 @@
     display: flex;
     margin-top: 8rem;
     justify-content: space-between;
-    align-items: center;
+    // align-items: center;
     width: 100%;
     padding: 20px;
 }
 .box-main-article .form-holder-base{
     width: 70%;
-    height: 100vh;
+    height: 100%;
     margin: 20px;
+    margin-top: 0;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
    padding: 20px;
 }
@@ -31,7 +32,7 @@
 .box-main-article .side-templete{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     width: 30%;
-    height: 100vh;
+    height: 100%;
     background-color: white;
     display: flex;
     flex-direction: column;

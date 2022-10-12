@@ -1,7 +1,46 @@
 <% content_for :title, "Knowledge Quest | Edit Article - #{@article.title}" %>
-<h1>Editing Article</h1>
 
-<%= form_with(model: @article) do |form| %>
+<div class="home">
+  <div class="sidenav-base">
+    <span class="logo">
+      <%= image_tag 'logo.png' %>
+    </span>
+    <div class="icon-holder">
+      <ul>
+        <li>
+          <%= image_tag 'image (9).png' %>
+        </li>
+        <li>
+          <%= image_tag 'image (8).png' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="nav-holder-base">
+    <div class="topnav-one-base">
+      <i class='bx bx-filter-alt'></i>
+      <span class="blue">
+        Knowledge base
+      </span>
+      <i class='bx bxs-chevron-right'></i>
+      <span>New Article</span>
+    </div>
+    <div class="topnav-two-base">
+      <div class="search">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          >
+          <button class="btn btn-outline-success" type="submit"><i class='bx bx-search'></i></button>
+        </form>
+
+      </div>
+
+
+      <%= form_with(model: @article) do |form| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@article.errors.count, "error") %> prohibited this folder from being saved:</h2>
@@ -13,29 +52,105 @@
       </ul>
     </div>
   <% end %>
+      <div class="button-container">
+     <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+           Update
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="box-main-article">
+    <div class="form-holder-base">
 
-  <div class="field">
+  <div class="form-name">
     <%= form.label :title %>
     <%= form.text_field :title, value: @article.title %>
   </div>
 
-  <div class="field">
+  <div class="form-name">
     <%= form.label :description %>
     <%= form.text_area :description, value: @article.description %>
   </div>
 
-  <div class="field">
+  <div class="form-name">
     <%= form.label :folder_id %>
-    <select name="article[folder_id]">
+    <select name="article[folder_id]" class="form-select">
       <% Folder.all.each do |folder| %>
       <option value = "<%= folder.id %>" <%=((@article.folder_id.to_i == folder.id.to_i) ? "selected" : nil)%>><%= folder.name %></option>
       <% end %>
     </select>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
 
-<%= link_to 'Back', "/articles/#{@article.id}" %>
+<% end %>
+    </div>
+    <div class="side-templete">
+    <div class="templete">
+    <h4 onclick="drop('ul-box-list')">Templete  <i class='bx bx-chevron-down'></i> </h4>
+    <ul class="ul-box" id="ul-box-list">
+    <li> Sample</li>
+    <li> Sample</li>
+    <li> Sample</li>
+    </ul>
+    </div>
+    <div class="article-prop">
+    <h4 onclick="drop('ul-box-list-2')">Article Properties <i class='bx bx-chevron-down'></i></h4>
+    <ul class="ul-box" id="ul-box-list-2" >
+    <li> Sample</li>
+    <li> Sample</li>
+    <li> Sample</li>
+    </ul>
+    </div>
+    <div class="templete">
+    <h4 onclick="drop('ul-box-list-3')">Test </h4>
+    <ul class="ul-box" id="ul-box-list-3">
+    <li> Sample</li>
+    <li> Sample</li>
+    <li> Sample</li>
+    </ul>
+    </div>
+    </div>
+  </div>
+</div>
+
+<%# <%= link_to 'Back', root_path %>
+
+
+
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

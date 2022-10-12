@@ -1,6 +1,132 @@
 <% content_for :title, "Knowledge Quest | Article - #{@article.title}" %>
 
-<p id="notice"><%= notice %></p>
+
+<div class="home">
+  <div class="sidenav-base">
+    <span class="logo">
+      <%= image_tag 'logo.png' %>
+    </span>
+    <div class="icon-holder">
+      <ul>
+        <li>
+          <%= image_tag 'image (9).png' %>
+        </li>
+        <li>
+          <%= image_tag 'image (8).png' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="nav-holder-base">
+    <div class="topnav-one-base">
+      <i class='bx bx-filter-alt'></i>
+      <span class="blue">
+        Knowledge base
+      </span>
+      <i class='bx bxs-chevron-right'></i>
+      <span><%= @article.folder.name %></span>
+       <i class='bx bxs-chevron-right'></i>
+      <span><%= @article.title %></span>
+    </div>
+    <div class="topnav-two-base">
+      <div class="search">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          >
+          <button class="btn btn-outline-success" type="submit"><i class='bx bx-search'></i></button>
+        </form>
+
+      </div>
+      <div class="button-container">
+
+        <%= link_to 'Clone', "/articles/#{@article.id}", class: "btn btn-outline-primary", method: :post %> 
+        <%= link_to 'Edit', edit_article_path(@article),class: "btn btn-outline-dark"%> 
+          <%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-outline-danger"%>
+      
+      </div>
+    </div>
+  </div>
+  <div class="box-main-article">
+    <div class="form-holder-base">
+      
+      <div class="form-name">
+      <h4>Title :-</h4>
+      <div class="box-text-title">
+      <%= @article.title %>
+
+      </div>     
+       </div>
+      <div class="form-name">
+      <h4>Discription</h4>
+      <div class="text-box-area">
+      <%= @article.description %>
+      </div>
+      </div>
+      <div class="form-name">
+      </div>
+
+    </div>
+    <div class="side-templete">
+    <div class="article-prop">
+    <h4 onclick="drop('ul-box-list-2')"> <%= @article.folder.name %> <i class='bx bx-chevron-down'></i></h4>
+    <ul class="ul-box" id="ul-box-list-2" >
+    <li> Sample</li>
+    <li> Sample</li>
+    <li> Sample</li>
+    </ul>
+    </div>
+    <div class="templete">
+    <h4 onclick="drop('ul-box-list-3')">Test <i class='bx bx-chevron-down'></i></h4>
+    <ul class="ul-box" id="ul-box-list-3">
+    <li> Sample</li>
+    <li> Sample</li>
+    <li> Sample</li>
+    </ul>
+    </div>
+    </div>
+  </div>
+</div>
+
+<%# <%= link_to 'Back', root_path %>
+
+
+
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <p>
   <strong>Title:</strong>
@@ -18,7 +144,7 @@
 </p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Clone', "/articles/#{@article.id}", method: :post %> |
-<%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>|
+<%= link_to 'Clone', "/articles/#{@article.id}", method: :post %> 
+<%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Back', "/folders/#{@article.folder.id}" %> 
 

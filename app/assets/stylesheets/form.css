@@ -27,3 +27,18 @@ input:focus{
     width: 40rem;
     height: 20rem;
 }
+
+.box-text-title{
+    font-size: 1.4rem;
+     background-color: var(--backcolor);
+    padding: 10px;
+}
+.text-box-area{
+    font-size: 1rem;
+    padding: 10px;
+    background-color: var(--backcolor);
+
+}
+.form-name > h4{
+margin:10px 0px;
+}

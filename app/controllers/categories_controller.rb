@@ -2,7 +2,7 @@
 
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
-
+  @folders = Folder.all
   # GET /categories or /categories.json
   def index
     @categories = Category.all
@@ -11,7 +11,8 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1 or /categories/1.json
-  def show; end
+  def show;
+   end
 
   # GET /categories/new
   def new

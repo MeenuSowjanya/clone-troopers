@@ -1,5 +1,104 @@
-<% content_for :title, "Knowledge Quest | Category - #{@category.name}" %>
-<p id="notice"><%= notice %></p>
+<div class="home">
+  <div class="sidenav-base">
+    <span class="logo">
+      <%= image_tag 'logo.png' %>
+    </span>
+    <div class="icon-holder">
+      <ul>
+        <li>
+          <%= image_tag 'image (9).png' %>
+        </li>
+        <li>
+          <%= image_tag 'image (8).png' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="nav-holder-base">
+    <div class="topnav-one-base">
+      <i class='bx bx-filter-alt'></i>
+      <span class="blue">
+        Knowledge base
+      </span>
+      <i class='bx bxs-chevron-right'></i>
+      <span>
+      <%= @category.name %>
+      </span>
+    </div>
+    <div class="topnav-two-base">
+      <div class="search">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          >
+          <button class="btn btn-outline-success" type="submit"><i class='bx bx-search'></i></button>
+        </form>
+
+      </div>
+      <div class="button-container">
+            <%= link_to '+ New Folder', new_folder_path ,class:'btn btn-secondary' %>
+             <%= link_to 'Edit', edit_category_path(@category) ,class:"btn btn-secondary" %> 
+  <%= link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%>
+    
+      </div>
+    </div>
+  </div>
+  <div class="box-main-article">
+
+    <div class="side-templete">
+     <% @category.folders.each do |folder| %>
+    <div class="templete">
+    <h4 onclick="drop('ul-box-list')"><a href="/folders/<%=folder.id%>"><%= folder.name %> </a>  <i class='bx bx-chevron-right'><%= folder.articles.count %></i> </h4>
+    <ul class="ul-box" id="ul-box-list"></ul>
+    </ul>
+    </div>
+     <% end %>
+
+    </div>
+        <div class="form-holder-base">
+     
+
+    </div>
+  </div>
+</div>
+
+<%# <%= link_to 'Back', root_path %>
+
+
+
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <table>
