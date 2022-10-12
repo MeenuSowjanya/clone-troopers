@@ -1,3 +1,64 @@
-// Place all the styles related to the Articles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.button-container{
+    margin-right: 90px;
+}
+.box-main-article{
+    display: flex;
+    margin-top: 8rem;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+.box-main-article .form-holder-base{
+    width: 70%;
+    height: 100vh;
+    margin: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   padding: 20px;
+}
+.form-holder-base .form-name input {
+
+    border: transparent;
+    outline: none;
+    font-size: 1.5rem ;
+    border-radius: 5px;
+}
+
+.form-holder-base .form-name input:focus{
+    border: 1px solid blue;
+}
+
+.box-main-article .side-templete{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 30%;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.box-main-article .side-templete > div{
+    height: fit-content;
+}
+.box-main-article .side-templete > div > h4{
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+padding: 20px;
+display: flex;
+justify-content: space-between;
+}
+.box-main-article .side-templete > div > .ul-box {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    height: fit-content;
+    padding-left: 20px !important;
+}
+
+.box-main-article .side-templete > div > ul li{
+    display: grid;
+    padding: 10px;
+
+}
+.close{
+    display: none;
+    transition: all ease-in-out 0.4s;
+}

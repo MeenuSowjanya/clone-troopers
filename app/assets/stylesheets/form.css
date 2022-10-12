@@ -12,10 +12,18 @@ input:focus{
    
 }
 .red{
-    color: red;
+    color: red; 
 
 }
 
 .text-area{
     border: 1px solid rgba;
+}
+
+.btn-holder-base{
+    display: inline-block;
+}
+.form-holder-base{
+    width: 40rem;
+    height: 20rem;
 }

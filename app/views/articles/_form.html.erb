@@ -11,30 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, value: @title %>
+  <div class="form-name">
+    
+    <%= form.text_field :title, value: @title ,placeholder: 'Title' %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, value: @description %>
-  </div>
+  
 
-  <div class="field">
+  <div class="form-name">
     <%= form.label :folder_id %>
-    <select name="article[folder_id]">
+    <select name="article[folder_id]" class="form-select">
       <% Folder.all.each do |folder| %>
       <option value = "<%= folder.id %>"><%= folder.name %></option>
       <% end %>
     </select>
   </div>
-
-  <div class="actions">
-    <%= form.submit "Create Article" %>
+<div class="form-name">
+    <%= form.label :description %>
+    <%= form.text_area :description, value: @description %>
   </div>
+<div class="btn-holder-base">
+   <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+           Save
+        <% end %>
+        <button class="btn btn-danger"> <%= link_to 'Back', root_path ,class: 'link_tag'%> </button>
+</div>
 <% end %>
-
 
 
   

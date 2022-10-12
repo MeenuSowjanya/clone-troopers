@@ -75,7 +75,7 @@
     width: 4rem;
 }
 
-.topnav-one-base i {
+.topnav-one-base .bx.bx-filter-alt {
     background-color: var(--backcolor);
     height: 2rem;
     width: 2rem;
