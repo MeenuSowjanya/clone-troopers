@@ -1,57 +1,129 @@
-<p id="notice"><%= notice %></p>
+<%= content_for :title, "Tickets" %>
+<div id="background">
+<div class="container">
+  
+  <div class="sidebar">
+    <nav>
+      <a href="/categories" class="logo_a"><%= image_tag "logo.png" %></a>
+      <ul>
+        <li><%= link_to "/tickets" do %>
+          <i class="fa-solid fa-ticket">
+          </i>
+          <% end %>
+        </li>
+        
+        <li>
+          <%= link_to "/categories" do %>
+          <i class="fa-solid fa-book-open"></i></li>
+          </i>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @ticket.title %>
-</p>
+  <div class="topnav">
+    <span>Tickets</span>
 
-<p>
-  <strong>Description:</strong>
-  <%= @ticket.description %>
-</p>
+  </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @ticket.status %>
-</p>
-
-<p>
-  <strong>Priority:</strong>
-  <%= @ticket.priority %>
-</p>
+  <div class="main-content" style="overflow: hidden;">
+    <div class="show_art_container" >
+      <div class="article_content" style="overflow-y: scroll;" id="scroll">
+        <p class="art_prop_p"><%= @ticket.title %></p>
+        <div class="art_desc" style="border-bottom: 2px solid rgb(207, 215, 223);">
+          <%= @ticket.description %>
+        </div>
+        <p class="art_prop_p">NOTES</p>
+        <% @ticket.notes.each do |note| %>
+        <div class="folderslist">
+          <span><%= note.description %></span>
+          <span style="float: right;">
+            <%= note.created_at.localtime.strftime("Created on %m/%d/%Y, %I:%M%p")%> 
+          </span>
+        </div>
+        <% end %>
 
 <br>
 
-<h4> Notes </h4>
-<% @ticket.notes.each do|note| %>
-  <%= note.description %>
-  <%= note.updated_at.localtime.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %><br>
-<% end %>
+<p class="art_prop_p">REPLIES</p>
+        <% @ticket.replies.each do |reply| %>
+        <div class="folderslist">
+          <span><%= reply.description %></span>
+          <span style="float: right;">
+            <%= reply.created_at.localtime.strftime("Created on %m/%d/%Y, %I:%M%p")%> 
+          </span>
+        </div>
+        <% end %>
 
-<br>
+      </div>
+      <div class="art_properties">
+        <p class="art_prop_p">TICKET PROPERTIES</p>
+        <div class="folderslist">
+            <%= @ticket.created_at.localtime.strftime("Created on %m/%d/%Y, %I:%M%p")%> 
+        </div>
+        <div class="folderslist">
+          <%= @ticket.updated_at.localtime.strftime("Modified on %m/%d/%Y, %I:%M%p")%> 
+      </div>
+      <div class="folderslist">
+        Status: <%= @ticket.status %> 
+    </div>
+    <div class="folderslist">
+       Priority: <%= @ticket.priority %>
+  </div>
+  
+<div class="folderslist" id="button_list">
+  <%=button_to @ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: "new_article_btn" do%>
+    Delete Ticket
+    <% end %>
+</div>
+<div class="folderslist" id="button_list">
+  <div class="soln_article_div"></div>
+  <button onclick="openForm()" class="new_article_btn">
+  <i class="fa-solid fa-plus"></i>
+      Solution Article 
+    </button>
+      
+    </div>
+      </div>
+    </div>
+  </div>
+  </div>
+    
+</div>
+</div>
 
-<h4> Replies </h4>
-<% @ticket.replies.each do|reply| %>
-  <%= reply.description %>
-  <%= reply.updated_at.localtime.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %> <br>
-<% end %>
 
-<br>
+<!-- The form -->
+<div class="form-popup" id="myForm">
+  <h1 style="font-size: 20px; margin: 10px; padding-bottom: 10px; border-bottom: 2px solid rgb(207, 215, 223);">Create a solution article</h1>
+  <%= form_with(url: "/tickets/redirect/#{@ticket.id}",method: :get, class: "form-container") do |form| %>
 
-<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<%= link_to 'Add note', "/notes/new/#{@ticket.id}" %> |
-<%= link_to 'Add reply', "/replies/new/#{@ticket.id}" %> |
-<a onclick="document.getElementById('popup').style.display='block';">Add solution article</a> |
-<%= link_to 'Back', tickets_path %>
-
-<div style="display:none" id="popup">
-  <br>
-  <%= form_with(url: "/tickets/redirect/#{@ticket.id}",method: :get) do |form| %>
-  <%= form.text_field :title, value: @ticket.title %><br>
-  <%= form.radio_button :redirect_to, 1 %> Make ticket description as article description <br>
-  <%= form.radio_button :redirect_to, 2 %> Make last note as article description <br>
-  <%= form.radio_button :redirect_to, 3 %> Make last reply as article description <br>
-  <%= form.radio_button :redirect_to, 4 %> Custom <br>
-  <%= form.submit %>
+    <label for="title"><b>Title</b></label>
+    <%= form.text_field :title, value: @ticket.title, class: "description_text", id: "title1" %><br><br>
+    <%= form.radio_button :redirect_to, 1 %> Make ticket description as article description <br><br>
+    <%= form.radio_button :redirect_to, 2 %> Make last note as article description <br><br>
+    <%= form.radio_button :redirect_to, 3 %> Make last reply as article description <br><br>
+    <%= form.radio_button :redirect_to, 4 %> Custom <br><br>
+    
+    <button type="submit" class="new_article_btn" style="float: right; margin-bottom: 10px;cursor: pointer;">Save</button>
+    <button type="button" class="new_article_btn" onclick="closeForm()" style="float: right; margin-bottom: 10px;cursor: pointer;">Cancel</button>
   <% end %>
 </div>
+
+<script>
+  function openForm() { 
+  document.getElementById("background").style.opacity = "0.1";
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("background").style.opacity = "1";
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+
+
+
+

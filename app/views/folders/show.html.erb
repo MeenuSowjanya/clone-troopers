@@ -1,32 +1,70 @@
-<% content_for :title, "Knowledge Quest | Folder - #{@folder.name}" %>
-<p id="notice"><%= notice %></p>
+<%= content_for :title, "Knowledge Base" %>
+<header>
+  <div class="logo">Xero<span>Source</span></div>
+</header>
+<div class="nav-btn">Menu</div>
+<div class="container">
+  
+  <div class="sidebar">
+    <nav>
+      <a href="/categories" class="logo_a"><%= image_tag "logo.png" %></a>
+      <ul>
+        <li><%= link_to "/tickets" do %>
+          <i class="fa-solid fa-ticket">
+          </i>
+          <% end %>
+        </li>
+        
+        <li>
+          <%= link_to "/categories" do %>
+          <i class="fa-solid fa-book-open"></i></li>
+          </i>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-<table>
+  <div class="topnav">
+    <span>Knowledge Base</span>
+    <span>
+      <%=button_to "/articles/new",method: :get, class: "new_article_btn" do%>
+      <i class="fa-solid fa-plus"></i>
+      New Article
+      <% end %>
+    </span>
 
-<tr>
-  <td>
-    <strong>Name:</strong>
-    <%= @folder.name %>
-  </td>
-  <td>
-    <strong>Description:</strong>
-    <%= @folder.description %>
-  </td>
-  <td>
-    <strong>Category:</strong>
-    <%= @folder.category.name %>
-  </td>
-</tr>
+  </div>
 
-<% @folder.articles.each do |article| %>
-<tr>
-   <td><a href="/articles/<%=article.id%>"><%= article.title %></a></td>
-   <td><%= article.updated_at.localtime.strftime("Last Modified : %I:%M%p , %m/%d/%Y") %></td>
-</tr>
-<% end %>
-<%= link_to 'Edit', edit_folder_path(@folder) %> |
-<%= link_to 'Destroy', "/folders/#{@folder.id}", method: :delete %>|
-<%= link_to 'Back', root_path %>
-</table>
+  <div class="main-content">
+    <div class="article_header_bg"><p style="color: #264966;">Articles (<%= @folder.articles.all.count %>)</p></div>
+    <% @folder.articles.each do |article| %>
+    <div class="folderslist">
+      <span style="margin-right: 10px;"><i class="fa-solid fa-newspaper"></i></span>
+      <span><a href="/articles/<%=article.id%>"><%= article.title %></a></span>
+      <span style="float: right;">
+        <%= article.created_at.localtime.strftime("Created on %m/%d/%Y, %I:%M%p")%> 
+      </span>
+    </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+	$('.nav-btn').on('click', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		$('.sidebar').slideToggle('fast');
 
-<%= link_to 'Create New Article', "/articles/new", method: :get %>
+		window.onresize = function(){
+			if ($(window).width() >= 768) {
+				$('.sidebar').show();
+			} else {
+				$('.sidebar').hide();
+			}
+		};
+	});
+});
+</script>
+
+

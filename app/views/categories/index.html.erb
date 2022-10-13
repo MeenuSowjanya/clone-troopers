@@ -1,40 +1,74 @@
-<% content_for :title, "Knowledge Quest | All Categories" %>
-<p id="notice"><%= notice %></p>
+<%= content_for :title, "Knowledge Base" %>
+<header>
+  <div class="logo">Xero<span>Source</span></div>
+</header>
+<div class="nav-btn">Menu</div>
+<div class="container">
+  
+  <div class="sidebar">
+    <nav>
+      <a href="/categories" class="logo_a"><%= image_tag "logo.png" %></a>
+      <ul>
+        <li><%= link_to "/tickets" do %>
+          <i class="fa-solid fa-ticket">
+          </i>
+          <% end %>
+        </li>
+        
+        <li>
+          <%= link_to "/categories" do %>
+          <i class="fa-solid fa-book-open"></i></li>
+          </i>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-<h1>Categories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td>==============================</td>
-        <td>=============================</td>
-      </tr>
-      <tr>
-        <td><%= link_to category.name, category %></td>
-        <td><%= category.description %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% category.folders.each do |folder| %>
-      <tr><td>-------------------------</td><td>-------------------------------</td></tr>
-      <tr>
-          <td><a href="/folders/<%=folder.id%>"><%= folder.name %></a></td>
-          <td><%= folder.articles.count %></td>
-        </tr>
+  <div class="topnav">
+    <span>Knowledge Base</span>
+    <span>
+      <%=button_to "/articles/new",method: :get, class: "new_article_btn" do%>
+      <i class="fa-solid fa-plus"></i>
+      New Article
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </span>
 
-<br>
+  </div>
 
-<%= link_to 'New Category', new_category_path %>
+  <div class="main-content">
+    <div class="flex-holder">
+      <% @categories.each do |category| %>
+      <div class="flex">
+        <i class="fa-solid fa-folder"></i>
+        <span><%=category.name%></span>
+        <br>
+        <% category.folders.each do |folder| %>
+        <div class="folderslist">
+        <span><a href="/folders/<%=folder.id%>"><%= folder.name %></a></span>
+        <span style="float:right;"><%= folder.articles.count %></span>
+      </div>
+      <% end %>
+      </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+	$('.nav-btn').on('click', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		$('.sidebar').slideToggle('fast');
+
+		window.onresize = function(){
+			if ($(window).width() >= 768) {
+				$('.sidebar').show();
+			} else {
+				$('.sidebar').hide();
+			}
+		};
+	});
+});
+</script>

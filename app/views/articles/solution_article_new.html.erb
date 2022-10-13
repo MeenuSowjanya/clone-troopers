@@ -1,36 +1,72 @@
-<%= form_with(model: @article) do |form| %>
-<% if @article.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
-
+<%= content_for :title, "Knowledge Base" %>
+<div class="container">
+  
+  <div class="sidebar">
+    <nav>
+      <a href="/categories" class="logo_a"><%= image_tag "logo.png" %></a>
       <ul>
-        <% @article.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
+        <li><%= link_to "/tickets" do %>
+          <i class="fa-solid fa-ticket">
+          </i>
+          <% end %>
+        </li>
+        
+        <li>
+          <%= link_to "/categories" do %>
+          <i class="fa-solid fa-book-open"></i></li>
+          </i>
+          <% end %>
+        </li>
       </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, value: @title %>
+    </nav>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, value: @description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :folder_id %>
-    <select name="article[folder_id]">
-      <% Folder.all.each do |folder| %>
-      <option value = "<%= folder.id %>"><%= folder.name %></option>
+  <div class="topnav">
+    <span>Knowledge Base</span>
+    <span>
+      <%=button_to "/articles/new", class: "new_article_btn" do%>
+      <i class="fa-solid fa-plus"></i>
+      New Article
       <% end %>
-    </select>
+    </span>
+
   </div>
 
-  <div class="actions">
-    <%= form.submit "Create Article" %>
+  <%= form_with(model: @article) do |form| %>
+
+  <div class="main-content">
+    <div class="show_art_container">
+      <div class="article_content">
+        <p class="art_prop_p"><%= form.text_field :title, value: @title, class: "description_text", id: "title" %></p>
+        <div class="art_desc">
+          <%= form.text_area :description, value: @description, class: "description_text", id: "desc" %>
+        </div>
+      </div>
+      <div class="art_properties">
+        <p class="art_prop_p">ARTICLE PROPERTIES</p>
+      
+        <div class="folderslist" id="button_list">
+          <select name="article[folder_id]" style="width: 200px; padding: 3px 10px; color: #192f39;border: 2px solid rgb(37, 37, 65);">
+            <% Folder.all.each do |folder| %>
+            <option value = "<%= folder.id %>" <%=((@article.folder_id.to_i == folder.id.to_i) ? "selected" : nil)%>><%= folder.name %></option>
+            <% end %>
+          </select>
+        </div>
+<div class="folderslist" id="button_list">
+  <%= button_tag 'Save', type: 'submit', class: "new_article_btn" %>
+</div>
+      </div>
+    </div>
   </div>
+  </div>
+    
+</div>
 <% end %>
+
+
+
+
+
+
+
+

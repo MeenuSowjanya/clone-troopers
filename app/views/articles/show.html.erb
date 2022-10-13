@@ -1,24 +1,83 @@
-<% content_for :title, "Knowledge Quest | Article - #{@article.title}" %>
+<%= content_for :title, "Knowledge Base" %>
+<div class="nav-btn">Menu</div>
+<div class="container">
+  
+  <div class="sidebar">
+    <nav>
+      <a href="/categories" class="logo_a"><%= image_tag "logo.png" %></a>
+      <ul>
+        <li><%= link_to "/tickets" do %>
+          <i class="fa-solid fa-ticket">
+          </i>
+          <% end %>
+        </li>
+        
+        <li>
+          <%= link_to "/categories" do %>
+          <i class="fa-solid fa-book-open"></i></li>
+          </i>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-<p id="notice"><%= notice %></p>
+  <div class="topnav">
+    <span>Knowledge Base</span>
+    <span>
+      <%=button_to "/articles/new",method: :get, class: "new_article_btn" do%>
+      <i class="fa-solid fa-plus"></i>
+      New Article
+      <% end %>
+    </span>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @article.description %>
-</p>
+  <div class="main-content">
+    <div class="show_art_container">
+      <div class="article_content">
+        <p class="art_prop_p"><%= @article.title %></p>
+        <div class="art_desc">
+          <%= @article.description %>
+        </div>
+      </div>
+      <div class="art_properties">
+        <p class="art_prop_p">ARTICLE PROPERTIES</p>
+        <div class="folderslist">
+            <%= @article.created_at.localtime.strftime("Created on %m/%d/%Y, %I:%M%p")%> 
+        </div>
+        <div class="folderslist">
+          <%= @article.updated_at.localtime.strftime("Modified on %m/%d/%Y, %I:%M%p")%> 
+      </div>
+      <div class="folderslist">
+        Category: <%= @article.folder.category.name %> 
+    </div>
+    <div class="folderslist">
+      Folder: <%= @article.folder.name %> 
+  </div>
+  <div class="folderslist" id="button_list">
+    <%=button_to "/articles/#{@article.id}", method: :post, class: "new_article_btn" do%>
+      Clone Article
+      <% end %>
+  </div>
+  <div class="folderslist" id="button_list">
+    <%=button_to edit_article_path(@article), method: :get, class: "new_article_btn" do%>
+      Edit Article
+      <% end %>
+</div>
+<div class="folderslist" id="button_list">
+  <%=button_to @article, method: :delete, data: { confirm: 'Are you sure?' }, class: "new_article_btn" do%>
+    Delete Article
+    <% end %>
+</div>
+      </div>
+    </div>
+  </div>
+  </div>
+    
+</div>
 
-<p>
-  <strong>Folder:</strong>
-  <%= @article.folder.name %>
-</p>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Clone', "/articles/#{@article.id}", method: :post %> |
-<%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>|
-<%= link_to 'Back', "/folders/#{@article.folder.id}" %> 
+
+
 
